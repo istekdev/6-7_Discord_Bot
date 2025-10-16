@@ -3,6 +3,7 @@ from termcolor import colored
 import discord
 import random
 import json
+import time
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -36,9 +37,19 @@ elif rng in [4, 8, 10]:
   pic = Mason67_4
   msg = Mason67_txt_4
 
+with open("config.json", "r") as r:
+  read = json.load(r)
+
 @bot.event
 async def start():
   print(colored("Mason has arisen.", "green", attrs=["bold"]))
+  print("")
+  print(colored(f"Developer: {read["socials"]["developer"]}", "white", attrs=["bold"]))
+  print(colored(f"Github: {read["socials"]["github"]}", "white", attrs=["bold"]))
+  raw = read["socials"]["created"]
+  local = time.localtime(raw)
+  date = time.strftime("%Y-%m-%d %H:%M:%S", local)
+  print(colored(f"Created: {date}", "white", attrs=["bold"]))
                       
 @client.event
 async def onmsg(msg):
@@ -48,8 +59,5 @@ async def onmsg(msg):
     img = discord.File(pic)
     await = ctx.send(file=img)
     await message.channel.send(msg)
-
-with open("config.json", "r") as r:
-  read = json.load(r)
   
 mason.run(read["token"])
