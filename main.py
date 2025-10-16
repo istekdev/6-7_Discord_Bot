@@ -60,4 +60,4 @@ async def onmsg(msg):
     await = ctx.send(file=img)
     await message.channel.send(msg)
   
-mason.run(read["token"])
+mason.run(read["token"]) # Go to config.json and put your own bot token!!
